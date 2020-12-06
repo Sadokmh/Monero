@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import AuthTypes from './auth.types';
+import {AuthTypes} from './auth.types';
 
 
 export class Login implements Action {

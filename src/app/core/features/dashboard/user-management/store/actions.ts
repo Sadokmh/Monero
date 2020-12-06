@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import UserTypes from './types';
+import {UserTypes} from './types';
 
 
 export class GetUsers implements Action {

@@ -1,4 +1,4 @@
-import AuthTypes from './auth.types'
+import {AuthTypes} from './auth.types'
 
 export interface AuthState {
     user: {},
@@ -17,7 +17,7 @@ const initialState: AuthState = {
 }
 
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: any) => {
     switch(action.type) {
         case AuthTypes.REGISTER_SUCCESS:
             return {

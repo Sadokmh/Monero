@@ -24,17 +24,13 @@ export class SignInComponent implements OnInit {
    }
 
 
+  ngOnInit(): void {
 
-
-
-  onSubmit() {
-    
   }
 
 
-
-
-  ngOnInit(): void {
+  onSubmit() {
+    console.log(this.form.value);
   }
 
 }

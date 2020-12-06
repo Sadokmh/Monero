@@ -1,4 +1,4 @@
-import UserTypes from './types'
+import {UserTypes} from './types'
 
 export interface UserState {
     users: [],
@@ -31,9 +31,14 @@ export const userReducer = (state = initialState, action: any) => {
             };
 
         case UserTypes.ADD_USER_SUCCESS:
-            state.users.push(action.payload); 
+            const newUser = action.payload;
+            const newUsers = {
+                ...state.users,
+                newUser
+            };
             return {
                 ...state,
+                users: newUsers,
                 error: {}
             };
 

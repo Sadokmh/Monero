@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as UserActions from './actions';
-import UserTypes from './types';
+import {UserTypes} from './types';
 import { mergeMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { UserManagementService } from '../user-management.service';
