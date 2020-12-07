@@ -25,9 +25,9 @@ export class AuthEffects {
             map(({user, token}: any) => {
                 console.log(user, token);
                 
-                localStorage.setItem('user', user);
+                localStorage.setItem('user', JSON.stringify(user));
                 localStorage.setItem('token', token);
-                this.router.navigate(['/dashboard']);
+                this.router.navigate(['/dashboard/users']);
                 return new AuthActions.LoginSuccess({user, token});
             }),
             catchError((error: any) => of(new AuthActions.ThrowError(error)))

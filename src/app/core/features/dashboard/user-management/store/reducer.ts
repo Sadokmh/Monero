@@ -1,17 +1,21 @@
+import { Role } from '../models/Role';
+import { User } from '../models/User'
 import {UserTypes} from './types'
 
 export interface UserState {
-    users: [],
-    selectedUser: {},
+    users: Array<User>,
+    selectedUser: User,
     error: any,
-    roles: []
+    roles: Array<Role>,
+    paginationConfig: any
 };
 
 const initialState: UserState = {
     users: [],
-    selectedUser: {},
+    selectedUser: {id: '', first_name: '', last_name: '', email: '', is_active: false, role: {id: '', title: ''}, createdAt: '', updatedAt: ''},
     error: null,
-    roles: []
+    roles: [],
+    paginationConfig: {has_next: false, next_page: 0}
 }
 
 
@@ -20,7 +24,8 @@ export const userReducer = (state = initialState, action: any) => {
         case UserTypes.GET_USERS_SUCCESS:
             return {
                 ...state,
-                users: action.payload,
+                users: action.payload.result,
+                paginationConfig: {has_next: action.payload.has_next, next_page: action.payload.next_page},
                 error: {}
             };
         case UserTypes.GET_USER_BY_ID_SUCCESS:
@@ -32,10 +37,10 @@ export const userReducer = (state = initialState, action: any) => {
 
         case UserTypes.ADD_USER_SUCCESS:
             const newUser = action.payload;
-            const newUsers = {
-                ...state.users,
-                newUser
-            };
+            const newUsers = [...state.users];
+            console.log(newUsers);
+            newUsers.push(newUser);
+           
             return {
                 ...state,
                 users: newUsers,
@@ -44,7 +49,7 @@ export const userReducer = (state = initialState, action: any) => {
 
         case UserTypes.UPDATE_USER_SUCCESS:
             console.log(state);
-            const updatedUsers = state.users.map((user: any) => user.id === action.payload.id ? action.payload : user);
+            const updatedUsers = state.users.map((user: User) => user.id === action.payload.id ? action.payload : user);
             return {
                 ...state,
                 users: updatedUsers,
@@ -52,7 +57,8 @@ export const userReducer = (state = initialState, action: any) => {
             };
 
         case UserTypes.DELETE_USER_SUCCESS:
-            const users = state.users.filter((user: any) => user.id !== action.payload.id);
+            console.log(action.payload)
+            const users = state.users.filter((user: User) => user.id !== action.payload);
             return {
                 ...state,
                 users: users,
@@ -65,6 +71,12 @@ export const userReducer = (state = initialState, action: any) => {
                 roles: action.payload,
                 error: {}
             };
+
+        case UserTypes.SELECT_USER:
+            return {
+                ...state,
+                selectedUser: action.payload
+            }
 
         case UserTypes.THROW_ERROR: 
             return {

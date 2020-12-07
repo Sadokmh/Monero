@@ -18,6 +18,11 @@ export const getRoles = createSelector(
     (state:any) => state.roles
 );
 
+export const getUsersPaginationConfig = createSelector(
+    userSelectors,
+    (state:any) => state.paginationConfig
+);
+
 export const getUserError = createSelector(
     userSelectors,
     (state:any) => state.error

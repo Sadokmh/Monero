@@ -6,6 +6,7 @@ import { mergeMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { UserManagementService } from '../user-management.service';
 import { Injectable } from '@angular/core';
+import { User } from '../models/User';
 
 
 
@@ -22,8 +23,8 @@ export class UserEffects {
         ofType(UserTypes.GET_USERS),
         map((action: UserActions.GetUsers) => action),
         mergeMap((requestData) => this.userService.getUsers().pipe(
-            map((users: any) => {
-                return new UserActions.GetUsersSuccess(users.result);
+            map((response: any) => {
+                return new UserActions.GetUsersSuccess(response);
             }),
             catchError((error: any) => of(new UserActions.ThrowError(error)))
         ))

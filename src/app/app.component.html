@@ -1,6 +1,6 @@
   <app-navbar *ngIf="!isLoggedIn"></app-navbar>
   <!-- Main content --> 
-  <div class="main-content">
+  <div *ngIf="!isLoggedIn" class="main-content">
     <!-- Header -->
     <div  *ngIf="!isLoggedIn" class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
       <div class="container">
@@ -18,6 +18,12 @@
     <!-- Page content -->
     <router-outlet></router-outlet>
   </div>
+
+  <div *ngIf="isLoggedIn">
+    <router-outlet></router-outlet>
+  </div>
+
+  
 
 
 

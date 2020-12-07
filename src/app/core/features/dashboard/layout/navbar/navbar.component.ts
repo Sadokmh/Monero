@@ -6,6 +6,7 @@ import * as authSelectors from '../../../auth/store/auth.selectors';
 import * as authActions from '../../../auth/store/auth.actions';
 import { takeWhile } from 'rxjs/operators';
 import { User } from '../../../auth/models/User.model';
+import { AuthService } from '../../../auth/auth.service';
 
 
 @Component({
@@ -19,19 +20,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
   connectedUser: any;
 
   constructor(
-    private store: Store<AuthState>
+    private store: Store<AuthState>,
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
     this.store.pipe(select(authSelectors.getUser),
     takeWhile(() => this.componentIsActive))
     .subscribe(user => {
+      console.log(user);
+      
       this.connectedUser = user;
     })
   }
 
   logout(): void {
-    this.store.dispatch(new authActions.Logout());
+    this.authService.logout();
   }
 
   ngOnDestroy(): void {

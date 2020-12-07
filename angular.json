@@ -40,8 +40,11 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/vendor/js-cookie/js.cookie.js",
               "src/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js",
               "src/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js",
+              "src/assets/vendor/chart.js/dist/Chart.min.js",
+              "src/assets/vendor/chart.js/dist/Chart.extension.js",
               "src/assets/js/argon.min5438.js"
               
               

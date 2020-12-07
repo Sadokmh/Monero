@@ -1,0 +1,78 @@
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Create new user !</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form role="form" [formGroup]="form" (submit)="submitForm()">
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                        </div>
+                        <input class="form-control" placeholder="First name" type="text" formControlName="first_name">
+                    </div>
+                    <small class="control-error" *ngIf="!form.controls['first_name'].valid && form.controls['first_name'].touched">
+                        Invalid field
+                      </small>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                        </div>
+                        <input class="form-control" placeholder="Last name" type="text" formControlName="last_name">
+                    </div>
+                    <small class="control-error" *ngIf="!form.controls['last_name'].valid && form.controls['last_name'].touched">
+                        Invalid field
+                      </small>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                        </div>
+                        <input class="form-control" placeholder="Email" type="email" formControlName="email">
+                    </div>
+                    <small class="control-error" *ngIf="!form.controls['email'].valid && form.controls['email'].touched">
+                        Invalid field
+                      </small>
+                </div>
+                <div  class="form-group mb-3">
+                  <div class="input-group input-group-merge input-group-alternative">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="ni ni-key-25"></i></span>
+                      </div>
+                      <input class="form-control" placeholder="Password" type="password" formControlName="password">
+                  </div>
+                  <small class="control-error" *ngIf="!form.controls['password'].valid && form.controls['password'].touched">
+                    Invalid field
+                  </small>
+              </div>
+                <div class="form-group mb-3">
+                  Role:
+                    
+                  <div *ngFor="let role of roles" class="custom-control custom-radio role-container">
+                    <input type="radio" [value]="role.id" [id]="role.id" class="custom-control-input role-label" formControlName="role">
+                    <label class="custom-control-label" [for]="role.id">{{role.title}}</label>
+                  </div>
+                </div>
+                <small class="control-error" *ngIf="!form.controls['role'].valid && form.controls['role'].touched">
+                    Invalid field
+                  </small>
+               
+                <div class="text-center">
+                    <button [disabled]="form.invalid" type="submit" class="btn btn-primary my-4">Create</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" #closeModal data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

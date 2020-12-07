@@ -32,12 +32,22 @@ export const authReducer = (state = initialState, action: any) => {
             };
 
         case AuthTypes.LOGOUT: 
-            localStorage.clear();
             return {
                 ...state,
                 isLoggedIn: false,
                 user: {},
-                token: ''
+                token: '',
+                error: null
+            }
+
+        case AuthTypes.AUTO_LOGIN:
+            const user = action.payload.user;
+            const token = action.payload.token;
+            return {
+                ...state,
+                isLoggedIn: true,
+                user,
+                token
             }
 
         case AuthTypes.THROW_ERROR: 

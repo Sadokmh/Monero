@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TokenInterceptor } from './service-layers/interceptors/token.interceptor';
+import { AuthModule } from './core/features/auth/auth.module';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { TokenInterceptor } from './service-layers/interceptors/token.intercepto
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    AuthModule,
     ReactiveFormsModule,
     FormsModule,
     StoreModule.forRoot({}),
