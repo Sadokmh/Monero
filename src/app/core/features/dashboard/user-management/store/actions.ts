@@ -58,7 +58,7 @@ export class GetRoles implements Action {
 }
 
 export class GetRolesSuccess implements Action {
-    readonly type = UserTypes.DELETE_USER;
+    readonly type = UserTypes.GET_ROLES_SUCCESS;
     constructor(public payload: any) {}
 }
 

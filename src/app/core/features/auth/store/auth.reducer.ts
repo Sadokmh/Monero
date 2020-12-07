@@ -4,16 +4,14 @@ export interface AuthState {
     user: {},
     token: string,
     isLoggedIn: boolean,
-    isRegistred: boolean,
-    isActivate: boolean
+    error: any
 };
 
 const initialState: AuthState = {
     user: {},
     token: '',
     isLoggedIn: false,
-    isRegistred: false,
-    isActivate: false
+    error: null
 }
 
 
@@ -22,7 +20,6 @@ export const authReducer = (state = initialState, action: any) => {
         case AuthTypes.REGISTER_SUCCESS:
             return {
                 ...state,
-                isRegistred: true,
                 error: {}
             };
         case AuthTypes.LOGIN_SUCCESS:
@@ -35,6 +32,7 @@ export const authReducer = (state = initialState, action: any) => {
             };
 
         case AuthTypes.LOGOUT: 
+            localStorage.clear();
             return {
                 ...state,
                 isLoggedIn: false,

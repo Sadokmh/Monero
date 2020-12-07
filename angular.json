@@ -32,13 +32,19 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/assets/css/style.css"
+              "src/assets/vendor/nucleo/css/nucleo.css",
+              "src/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css",
+              "src/assets/css/argon.min5438.css"
+              
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "src/assets/js/demo.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js",
+              "src/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js",
               "src/assets/js/argon.min5438.js"
+              
+              
             ]
           },
           "configurations": {

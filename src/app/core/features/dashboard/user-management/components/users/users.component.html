@@ -1,1 +1,135 @@
-<p>users works!</p>
+<<div class="card">
+    <!-- Card header -->
+    <div class="card-header border-0">
+      <div class="row">
+        <div class="col-6">
+          <h3 class="mb-0">Users management</h3>
+        </div>
+        <div class="col-6 text-right">
+          <a href="#" class="btn btn-sm btn-neutral btn-round btn-icon" (click)="createUserModal()" data-toggle="modal" data-target="#editUserModal">
+            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+            <span class="btn-inner--text">Add</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Light table -->
+    <div class="table-responsive">
+      <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+          <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Role</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="users">
+          <tr *ngFor="let user of users">
+            <td class="table-user">
+              {{user.first_name}}
+            </td>
+            <td class="table-user">
+              {{user.last_name}}
+              </td>
+              <td class="table-user">
+                {{user.email}}
+              </td>
+              <td class="table-user">
+                {{user.is_active ? 'Active' : 'Inactive'}}
+              </td>
+              <td class="table-user">
+                {{user.role.title}}
+              </td>
+      
+            <td class="table-actions">
+              <a class="table-action" data-toggle="modal" data-target="#editUserModal" (click)="selectUser(user)">
+                <i class="fas fa-user-edit"></i>
+              </a>
+              <a class="table-action table-action-delete" (click)="deleteUser(user.id)" >
+                <i class="fas fa-trash"></i>
+              </a>
+              <a class="table-action table-action-delete" (click)="changeUserStatus(user)">
+                <i *ngIf="user.is_active" class="ni ni-fat-remove"></i>
+                <i *ngIf="!user.is_active" class="ni ni-check-bold"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+        <div *ngIf="!users" class="d-flex justify-content-center text-center">
+          <small class="">No users yet !</small>
+        </div>
+        
+      </table>
+    </div>
+  </div>
+
+
+  <!-- Modals -->
+
+  
+  <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">{{mode === 'create' ? 'Create new ' : 'Update '}} user !</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form role="form" [formGroup]="form" (submit)="submitForm()">
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                        </div>
+                        <input class="form-control" placeholder="First name" type="text" formControlName="first_name">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                        </div>
+                        <input class="form-control" placeholder="Last name" type="text" formControlName="last_name">
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                        </div>
+                        <input class="form-control" placeholder="Email" type="email" formControlName="email">
+                    </div>
+                </div>
+                <div *ngIf="mode === 'create'" class="form-group mb-3">
+                  <div class="input-group input-group-merge input-group-alternative">
+                      <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="ni ni-key-25"></i></span>
+                      </div>
+                      <input class="form-control" placeholder="Password" type="password" formControlName="password">
+                  </div>
+              </div>
+                <div *ngIf="mode === 'create'" class="form-group mb-3">
+                  Role:
+                    
+                  <div *ngFor="let role of roles" class="custom-control custom-radio">
+                    <input type="radio" [value]="role.id" [id]="role.id" class="custom-control-input role-label" formControlName="role">
+                    <label class="custom-control-label" [for]="role.id">{{role.title}}</label>
+                  </div>
+                </div>
+               
+                <div class="text-center">
+                    <button [disabled]="form.invalid" type="submit" class="btn btn-primary my-4">Save changes</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" #closeModal data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>

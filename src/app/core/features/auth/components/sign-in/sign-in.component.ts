@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { select, Store } from '@ngrx/store';
 import * as fromAuth from 'src/app/core/features/auth/store/auth.reducer';
+import { AuthService } from '../../auth.service';
+import * as AuthActions from '../../store/auth.actions';
 
 
 @Component({
@@ -11,26 +13,36 @@ import * as fromAuth from 'src/app/core/features/auth/store/auth.reducer';
 })
 export class SignInComponent implements OnInit {
 
-  form: FormGroup;
+  loginForm: FormGroup;
+  emailControlMessage: string = 'Email is required';
+  passwordControlMessage: string = 'Password is required';
+
+  isLoading: boolean = false;
+
 
   constructor(
-    private store: Store<fromAuth.AuthState>
-
+    private store: Store<fromAuth.AuthState>,
+    private FB: FormBuilder,
+    private authService: AuthService
   ) {
-    this.form = new FormGroup({
-      email: new FormControl(null, {validators: [Validators.email]}),
-      password: new FormControl(null, {validators: [Validators.minLength(8)]})
+    this.loginForm = new FormGroup({
+      email: new FormControl('', {validators: [Validators.email, Validators.required]}),
+      password: new FormControl('', {validators: [Validators.required, Validators.minLength(8)]})
     });
-   }
+  }
 
 
   ngOnInit(): void {
-
   }
+
+  
 
 
   onSubmit() {
-    console.log(this.form.value);
+    this.isLoading=true;
+    this.store.dispatch(new AuthActions.Login(this.loginForm.value));
   }
+
+
 
 }

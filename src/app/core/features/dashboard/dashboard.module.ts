@@ -3,23 +3,29 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/dashboard.reducers';
-import { UserManagementModule } from './user-management/user-management.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { EffectsModule } from '@ngrx/effects';
 import { UserEffects } from './user-management/store/effects';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { HeaderComponent } from './layout/header/header.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { userReducer } from './user-management/store/reducer';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [DashboardComponent, SidebarComponent, NavbarComponent, HeaderComponent, FooterComponent],
   imports: [
     CommonModule,
-    UserManagementModule,
     DashboardRoutingModule,
-    StoreModule.forFeature('dashboard', reducers),
+    ReactiveFormsModule,
+    FormsModule,
+    RouterModule,
+    StoreModule.forFeature('users', userReducer),
     EffectsModule.forFeature([UserEffects])
-
   ]
 })
 export class DashboardModule { }

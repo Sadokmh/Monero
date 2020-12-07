@@ -1,9 +1,8 @@
-<body class="bg-default">
-  <app-navbar></app-navbar>
-  <!-- Main content -->
+  <app-navbar *ngIf="!isLoggedIn"></app-navbar>
+  <!-- Main content --> 
   <div class="main-content">
     <!-- Header -->
-    <div  class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
+    <div  *ngIf="!isLoggedIn" class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
       <div class="container">
         <div class="header-body text-center mb-7">
           <div class="row justify-content-center">
@@ -20,7 +19,6 @@
     <router-outlet></router-outlet>
   </div>
 
-</body>
 
 
 

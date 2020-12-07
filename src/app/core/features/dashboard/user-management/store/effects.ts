@@ -23,7 +23,7 @@ export class UserEffects {
         map((action: UserActions.GetUsers) => action),
         mergeMap((requestData) => this.userService.getUsers().pipe(
             map((users: any) => {
-                return new UserActions.GetUsersSuccess(users);
+                return new UserActions.GetUsersSuccess(users.result);
             }),
             catchError((error: any) => of(new UserActions.ThrowError(error)))
         ))
@@ -73,6 +73,18 @@ export class UserEffects {
         mergeMap((id) => this.userService.deleteUser(id).pipe(
             map((result: any) => {
                 return new UserActions.DeleteUserSuccess(id);
+            }),
+            catchError((error: any) => of(new UserActions.ThrowError(error)))
+        ))
+    );
+
+    @Effect()
+    getRoles$ = this.$actions.pipe(
+        ofType(UserTypes.GET_ROLES),
+        map((action: UserActions.GetRoles) => action),
+        mergeMap(() => this.userService.getRoles().pipe(
+            map((roles: any) => {
+                return new UserActions.GetRolesSuccess(roles);
             }),
             catchError((error: any) => of(new UserActions.ThrowError(error)))
         ))

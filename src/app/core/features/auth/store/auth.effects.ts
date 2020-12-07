@@ -23,10 +23,12 @@ export class AuthEffects {
         map((action: AuthActions.Login) => action.payload),
         mergeMap((requestData) => this.authService.login(requestData).pipe(
             map(({user, token}: any) => {
+                console.log(user, token);
+                
                 localStorage.setItem('user', user);
                 localStorage.setItem('token', token);
                 this.router.navigate(['/dashboard']);
-                return new AuthActions.LoginSuccess(user);
+                return new AuthActions.LoginSuccess({user, token});
             }),
             catchError((error: any) => of(new AuthActions.ThrowError(error)))
         ))

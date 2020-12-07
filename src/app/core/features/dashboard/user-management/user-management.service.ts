@@ -28,4 +28,8 @@ export class UserManagementService {
   deleteUser(id: string) {
     return this.httpClient.delete(`${API_URL}/users/${id}`);
   }
+
+  getRoles() {
+    return this.httpClient.get(`${API_URL}/roles`);
+  }
 }

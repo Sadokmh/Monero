@@ -43,6 +43,7 @@ export const userReducer = (state = initialState, action: any) => {
             };
 
         case UserTypes.UPDATE_USER_SUCCESS:
+            console.log(state);
             const updatedUsers = state.users.map((user: any) => user.id === action.payload.id ? action.payload : user);
             return {
                 ...state,
