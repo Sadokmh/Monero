@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TokenInterceptor } from './service-layers/interceptors/token.interceptor';
 import { AuthModule } from './core/features/auth/auth.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { AuthModule } from './core/features/auth/auth.module';
     AuthModule,
     ReactiveFormsModule,
     FormsModule,
+    SharedModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({

@@ -71,16 +71,15 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   changeUserStatus(user: User) {
-    console.log(user);
-    user = {
-      ...user,
+    const updatedUser = {
+      id: user.id,
       is_active: !user.is_active
     };
-    this.store.dispatch(new userActions.UpdateUser(user));
+    this.store.dispatch(new userActions.UpdateUser(updatedUser));
   }
 
 
-  deleteUser(id: string) {
+  deleteUser(id: any) {
     this.store.dispatch(new userActions.DeleteUser(id));
   }
 

@@ -29,6 +29,7 @@ export class AuthService {
   checkLoginStatus() {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
+    
     if (!token || !user) {
       return false;
     }
@@ -38,9 +39,22 @@ export class AuthService {
   autoLogin() {
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user') || '';
+
     if (token || user) {
       const autoLoginData = {
-        user: JSON.parse(user),
+        user:  {
+      id: '9ff81042-1ff9-4090-b3a6-233ab43e0f98',
+      first_name: 'Hamdi',
+      last_name: 'Saka',
+      email: 'hamdi.sakka@yopmail.com',
+      is_active: true,
+      created_at: '2020-12-05T20:15:31.746Z',
+      updated_at: '2020-12-05T21:14:42.485Z',
+      role: {
+        id: '4aaf10b5-d8aa-4d35-98a8-5fb5fcba4da0',
+        title: 'ADMIN'
+      }
+    },
         token
       }
       this.store.dispatch(new authActions.AutoLogin(autoLoginData))

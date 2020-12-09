@@ -36,7 +36,7 @@ export class AddUserSuccess implements Action {
 
 export class UpdateUser implements Action {
     readonly type = UserTypes.UPDATE_USER;
-    constructor(public payload: User) {}
+    constructor(public payload: any) {}
 }
 
 export class UpdateUserSuccess implements Action {

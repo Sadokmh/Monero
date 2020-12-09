@@ -13,11 +13,12 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { userReducer } from './user-management/store/reducer';
+import { MainComponent } from './components/main/main.component';
 
 
 
 @NgModule({
-  declarations: [DashboardComponent, SidebarComponent, NavbarComponent, HeaderComponent, FooterComponent],
+  declarations: [DashboardComponent, SidebarComponent, NavbarComponent, HeaderComponent, FooterComponent, MainComponent],
   imports: [
     CommonModule,
     DashboardRoutingModule,

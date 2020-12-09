@@ -6,7 +6,7 @@ import { mergeMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { UserManagementService } from '../user-management.service';
 import { Injectable } from '@angular/core';
-import { User } from '../models/User';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -15,7 +15,8 @@ export class UserEffects {
     constructor(
         private $actions: Actions,
         private userService: UserManagementService,
-        private router: Router
+        private router: Router,
+        private toaster: ToastrService
     ) {}
 
     @Effect()
@@ -48,6 +49,9 @@ export class UserEffects {
         map((action: UserActions.AddUser) => action.payload),
         mergeMap((requestData) => this.userService.addUser(requestData).pipe(
             map((user: any) => {
+                console.log("con");
+                
+                this.toaster.success('User added successfuly !', 'Success');
                 return new UserActions.AddUserSuccess(user);
             }),
             catchError((error: any) => of(new UserActions.ThrowError(error)))
@@ -60,6 +64,7 @@ export class UserEffects {
         map((action: UserActions.UpdateUser) => action.payload),
         mergeMap((requestData) => this.userService.updateUser(requestData).pipe(
             map((user: any) => {
+                this.toaster.success('User edited successfuly !', 'Success');
                 return new UserActions.UpdateUserSuccess(user);
             }),
             catchError((error: any) => of(new UserActions.ThrowError(error)))
@@ -73,6 +78,7 @@ export class UserEffects {
         map((action: UserActions.DeleteUser) => action.payload),
         mergeMap((id) => this.userService.deleteUser(id).pipe(
             map((result: any) => {
+                this.toaster.success('User deleted successfuly !', 'Success');
                 return new UserActions.DeleteUserSuccess(id);
             }),
             catchError((error: any) => of(new UserActions.ThrowError(error)))

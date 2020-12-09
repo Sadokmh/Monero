@@ -1,70 +1,78 @@
-<div class="card">
-    <!-- Card header -->
-    <div class="card-header border-0">
-      <div class="row">
-        <div class="col-6">
-          <h3 class="mb-0">Users management</h3>
-        </div>
-        <div class="col-6 text-right">
-          <a href="#" class="btn btn-sm btn-neutral btn-round btn-icon" (click)="createUserModal()" data-toggle="modal" data-target="#addUserModal">
-            <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
-            <span class="btn-inner--text">Add</span>
-          </a>
+<div>
+  <div class="row">
+    <div class="col-xl-12">
+  
+  <div class="card">
+      <!-- Card header -->
+      <div class="card-header border-0">
+        <div class="row">
+          <div class="col-6">
+            <h3 class="mb-0">Users management</h3>
+          </div>
+          <div class="col-6 text-right">
+            <a href="#" class="btn btn-sm btn-neutral btn-round btn-icon" (click)="createUserModal()" data-toggle="modal" data-target="#addUserModal">
+              <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+              <span class="btn-inner--text">Add</span>
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- Light table -->
-    <div class="table-responsive">
-      <table class="table align-items-center table-flush">
-        <thead class="thead-light">
-          <tr>
-            <th>First name</th>
-            <th>Last name</th>
-            <th>Email</th>
-            <th>Status</th>
-            <th>Role</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody *ngIf="users">
-          <tr *ngFor="let user of users">
-            <td class="table-user">
-              {{user.first_name}}
-            </td>
-            <td class="table-user">
-              {{user.last_name}}
+      <!-- Light table -->
+      <div class="table-responsive">
+        <table class="table align-items-center table-flush">
+          <thead class="thead-light">
+            <tr>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="users">
+            <tr *ngFor="let user of users" [ngClass]="{'inactive-user': !user.is_active}">
+              <td class="table-user">
+                {{user.first_name}}
               </td>
               <td class="table-user">
-                {{user.email}}
-              </td>
-              <td class="table-user">
-                {{user.is_active ? 'Active' : 'Inactive'}}
-              </td>
-              <td class="table-user">
-                {{user.role.title}}
-              </td>
-      
-            <td class="table-actions">
-              <a class="table-action" (click)="selectUser(user)" data-toggle="modal" data-target="#editUserModal" >
-                <i class="fas fa-user-edit"></i>
-              </a>
-              <a class="table-action table-action-delete" (click)="deleteUser(user.id)" >
-                <i class="fas fa-trash"></i>
-              </a>
-              <a class="table-action table-action-delete" (click)="changeUserStatus(user)">
-                <i *ngIf="user.is_active" class="ni ni-fat-remove"></i>
-                <i *ngIf="!user.is_active" class="ni ni-check-bold"></i>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-        <div *ngIf="!users" class="d-flex justify-content-center text-center">
-          <small class="">No users yet !</small>
-        </div>
+                {{user.last_name}}
+                </td>
+                <td class="table-user">
+                  {{user.email}}
+                </td>
+                <td class="table-user">
+                  {{user.is_active ? 'Active' : 'Inactive'}}
+                </td>
+                <td class="table-user">
+                  {{user.role.title}}
+                </td>
         
-      </table>
+              <td class="table-actions">
+                <a class="table-action" (click)="selectUser(user)" data-toggle="modal" data-target="#editUserModal" >
+                  <i class="fas fa-user-edit"></i>
+                </a>
+                <a class="table-action table-action-delete" (click)="deleteUser(user.id)" >
+                  <i class="fas fa-trash"></i>
+                </a>
+                <a class="table-action table-action-delete" (click)="changeUserStatus(user)">
+                  <i *ngIf="user.is_active" class="ni ni-fat-remove"></i>
+                  <i *ngIf="!user.is_active" class="ni ni-check-bold"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+          <div *ngIf="!users" class="d-flex justify-content-center text-center">
+            <small class="">No users yet !</small>
+          </div>
+          
+        </table>
+      </div>
     </div>
+  
   </div>
+  </div> 
+</div>
 
 
   <!-- Modals -->
